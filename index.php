@@ -3,8 +3,12 @@ session_start();
 require_once "src/facebook.php"; 
 
 $config = array(
-    "appId" => FACEBOOK_APP_ID,
-    "secret" => FACEBOOK_APP_SECRET);
+    "appId" => "1722350238025805",
+    "secret" => "3785743700eeb3f2752d39c5825a9ceb",
+    	"cookie" => true,
+		'fileUpload' => true
+    
+    );
 
 $fb = new Facebook($config);
 
