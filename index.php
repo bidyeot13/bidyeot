@@ -4,7 +4,7 @@
 	
 	require 'api/facebook.php';
 	
-	$facebook = new Facebook(array(
+	$facebook = new Facebook \ Facebook(array(
 		'appId'  => "1722350238025805",
 		'secret' => "3785743700eeb3f2752d39c5825a9ceb",
 		"cookie" => true,
