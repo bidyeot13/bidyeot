@@ -23,7 +23,7 @@ $user = $fb->getUser();
 if (!$user) { 
     $params = array(
         "scope" => "read_stream,publish_stream,user_photos",
-        "redirect_uri" => REDIRECT_URI);
+        "redirect_uri" => "http://apps.facebook.com/bidpropic/");
     echo '<a href="' . $fb->getLoginUrl($params) . '">Login</a>'; 
 }
 else { 
