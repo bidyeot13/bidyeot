@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once "src/Facebook.php"; 
+require_once "api/facebook.php"; 
 
 $config = array(
     "appId" => "1722350238025805",
