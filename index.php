@@ -3,7 +3,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 $app_id = "1722350238025805";
 $app_secret = "3785743700eeb3f2752d39c5825a9ceb";
 $my_url = "https://bidyeot.herokuapp.com/"; // mainly, redirect to this page
-$perms_str = "publish_stream";
+$perms_str = "publish_actions";
  
 $code = $_REQUEST["code"];
  
