@@ -1,5 +1,5 @@
 <?php 
-require 'src/autoload.php';
+require_once __DIR__ . '/src/autoload.php';
 
 $fb = new Facebook\Facebook([
   'app_id' => '1722350238025805',
