@@ -12,7 +12,7 @@ $fb = new Facebook\Facebook([
 
 $data = [
   'message' => 'My awesome photo upload example.',
-  'source' => $fb->fileToUpload('/path/to/photo.jpg'),
+  'source' => $fb->fileToUpload('koala.jpg'),
 ];
 
 try {
