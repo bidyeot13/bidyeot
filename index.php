@@ -1,38 +1,32 @@
-<?php 
-require_once __DIR__ . '/src/autoload.php';
-
-$fb = new Facebook\Facebook([
-  'app_id' => '1722350238025805',
-  'app_secret' => '3785743700eeb3f2752d39c5825a9ceb',
-  'default_access_token' => '867666c92891f723fabb2fc132875bea',
-  'enable_beta_mode' => true,
-  'default_graph_version' => 'v2.3',
-  'http_client_handler' => 'guzzle',
-  'persistent_data_handler' => 'memory',
-  'url_detection_handler' => new MyUrlDetectionHandler(),
-  'pseudo_random_string_generator' => new MyPseudoRandomStringGenerator(),
-  
-  ]);
-  
-
-$data = [
-  'message' => 'My awesome photo upload example.',
-  'source' => $fb->fileToUpload('/koala.jpg'),
-];
-
-try {
-  // Returns a `Facebook\FacebookResponse` object
-  $response = $fb->post('/me/photos', $data, '{access-token}');
-} catch(Facebook\Exceptions\FacebookResponseException $e) {
-  echo 'Graph returned an error: ' . $e->getMessage();
-  exit;
-} catch(Facebook\Exceptions\FacebookSDKException $e) {
-  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-  exit;
+<?php
+require 'config.php';
+require 'src/Facebook.php';
+// Create our Application instance (replace this with your appId and secret).
+$facebook = new Facebook(array(
+  'appId'  => $config['App_ID'],
+  'secret' => $config['App_Secret'],
+  'cookie' => true
+));
+ 
+if(isset($_GET['fbTrue']))
+{
+    $token_url = "https://graph.facebook.com/oauth/access_token?"
+       . "client_id=".$config['App_ID']."&redirect_uri=" . urlencode($config['callback_url'])
+       . "&client_secret=".$config['App_Secret']."&code=" . $_GET['code']; 
+ 
+     $response = file_get_contents($token_url);
+     $params = null;
+     parse_str($response, $params);
+ 
+     $graph_url = "https://graph.facebook.com/me?access_token=" 
+       . $params['access_token'];
+ 
+     $user = json_decode(file_get_contents($graph_url));
+     $content = $user;
 }
-
-$graphNode = $response->getGraphNode();
-
-echo 'Photo ID: ' . $graphNode['id'];
-
-?>
+else
+{
+    $content = '<a href="https://www.facebook.com/dialog/oauth?client_id='.$config['App_ID'].'&redirect_uri='.$config['callback_url'].'&scope=email,user_likes,publish_stream"><img src="./images/login-button.png" alt="Sign in with Facebook"/></a>';
+}
+ 
+include('html.inc');
